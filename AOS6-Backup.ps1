@@ -26,7 +26,7 @@ $Prompt = "->" #The basic prompt character is defined here, by default "->" ; It
 #AOS Revision 6 commands, Rev. 6 Switch
 # Here you can add or delete commands   syntax: 'command' separated by ","
 
-$commandArrayOldSyntax = @('show system','show chassis','show module','show module status','show ip helper dhcp-snooping binding','show interfaces status','show mac-address-table','show arp','show lldp remote-system','write terminal','show microcode')
+$commandArrayOldSyntax = @('show system','show chassis','show module','show module status','show ip helper dhcp-snooping binding','show interfaces status','show mac-address-table','show arp','write terminal','show microcode')
 
 #------------------OUTPUT LOCATION = SCRIPT LOCATION-------------------------
 
@@ -101,8 +101,6 @@ foreach ($command in $commandArrayOldSyntax) {
     # to remove command line from output -> remove "#" below
     #$Rev6Stream.ReadLine() | Out-Null
 
-    #Start-Sleep -Milliseconds 500
-
     while ($Rev6Stream.DataAvailable -eq $false){ #If there is no stream wait
     Write-Host "wait for stream" -ForegroundColor Yellow 
     Start-Sleep -Milliseconds 500
@@ -139,7 +137,7 @@ foreach ($command in $commandArrayOldSyntax) {
     
 }
 
-#end
+#-----------END - remove session-----------------------------------------------------
 Remove-SSHSession -SSHSession $Rev6Session
 echo "end of the script, connection terminated : " $Rev6Session
 echo "output stored under:" $directory_save_with_ip
